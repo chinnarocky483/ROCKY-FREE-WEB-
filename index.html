@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextView and Button Example</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        #textview1 {
+            font-size: 20px;
+            color: black;
+            transition: color 0.5s ease;
+        }
+        .glow {
+            color: red;
+            text-shadow: 0 0 10px red;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="textview1">(…)</div>
+        <button onclick="changeTextSize()">Click Me</button>
+    </div>
+
+    <script>
+        let isBig = false;
+        function changeTextSize() {
+            const textview = document.getElementById("textview1");
+            if (isBig) {
+                textview.style.fontSize = "20px";
+                textview.innerText = "(…)"; // Reset to default text
+            } else {
+                textview.style.fontSize = "40px";
+                textview.innerText = "BIG"; // Change text to "BIG"
+            }
+            isBig = !isBig;
+
+            // Apply glow effect
+            textview.classList.add("glow");
+
+            // Remove glow effect after 1 second
+            setTimeout(() => {
+                textview.classList.remove("glow");
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
