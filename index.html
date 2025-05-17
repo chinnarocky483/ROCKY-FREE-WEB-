@@ -2,67 +2,135 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Server Offline - ROCKY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Server Loading</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1e1e2f, #2a2a40);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      text-align: center;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(ellipse at top, #1f2937, #111827);
+      overflow: hidden;
     }
 
-    .loader {
-      border: 8px solid #444;
-      border-top: 8px solid #00f2ff;
-      border-radius: 50%;
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: float 30s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes float {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-25%, -25%); }
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid transparent;
+      border-radius: 1rem;
+      background-clip: padding-box;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      position: relative;
+      padding: 2rem;
+      z-index: 1;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      z-index: -1;
+      background: linear-gradient(45deg, #3b82f6, #9333ea, #06b6d4);
+      background-size: 400% 400%;
+      border-radius: inherit;
+      animation: borderAnimation 8s ease infinite;
+    }
+
+    @keyframes borderAnimation {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .infinity-loader {
       width: 80px;
-      height: 80px;
-      animation: spin 1s linear infinite;
-      margin: 20px 0;
+      height: 40px;
+      position: relative;
+      margin: auto;
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .infinity-loader::before,
+    .infinity-loader::after {
+      content: "";
+      box-sizing: border-box;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #3b82f6;
+      border-radius: 50%;
+      animation: rotate 1s infinite ease-in-out;
     }
 
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.2em;
+    .infinity-loader::after {
+      right: 0;
+      animation-delay: 0.5s;
     }
 
-    p {
-      font-size: 1.1em;
-      margin-bottom: 1.5em;
-      color: #ccc;
+    @keyframes rotate {
+      0%, 100% {
+        transform: scale(0.7);
+        opacity: 0.5;
+      }
+      50% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
-    .contact {
-      background: #00f2ff;
-      padding: 10px 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-      transition: background 0.3s;
+    .animate-text {
+      background: linear-gradient(90deg, #3b82f6, #06b6d4, #9333ea);
+      background-size: 200% 200%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 4s linear infinite;
     }
 
-    .contact:hover {
-      background: #00c2d4;
+    @keyframes shine {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
   </style>
 </head>
-<body>
-  <h1>SERVER OFFLINE</h1>
-  <div class="loader"></div>
-  <p>Server is currently unavailable. Please contact admin to bring it online.</p>
-  <a class="contact" href="https://t.me/ROCKY_BHAI_00007" target="_blank">@ROCKY_BHAI_00007</a>
+<body class="flex items-center justify-center min-h-screen text-white px-4">
+
+  <div class="glass-card text-center">
+    <div class="infinity-loader mb-6"></div>
+    <h1 class="text-3xl font-semibold mb-2 animate-text">Connecting to Server...</h1>
+    <p class="text-gray-300 mb-6">Please wait while we establish a secure connection.</p>
+
+    <div class="text-sm text-gray-400">
+      Need help? Contact Developer:
+      <a href="https://t.me/ROCKY_BHAI_00007" target="_blank" class="text-blue-400 hover:text-purple-400 transition duration-200 underline ml-1">
+        @ROCKY_BHAI_00007
+      </a>
+    </div>
+  </div>
+
 </body>
 </html>
